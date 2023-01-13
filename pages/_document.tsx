@@ -5,13 +5,19 @@ import { META_CONTENT } from "../utils/const/seo";
 
 const Document: NextPage<DocumentProps> = (props) => {
   const { __NEXT_DATA__: pageData, buildManifest } = props;
-  // console.log({ buildManifest });
   const { page }: NEXT_DATA = pageData;
+
+  const validPagePaths = Object.keys(buildManifest.pages);
+  const pagePath = validPagePaths.includes(page) ? page : "/_error";
+
   return (
     <Html>
       <Head>
-        <meta name="title" content={META_CONTENT[page].TITLE as string} />
-        <meta name="description" content={META_CONTENT[page].DESC as string} />
+        <meta name="title" content={META_CONTENT[pagePath].TITLE as string} />
+        <meta
+          name="description"
+          content={META_CONTENT[pagePath].DESC as string}
+        />
         <meta
           name="keywords"
           content={(META_CONTENT[page].KEYWORDS as Array<string>).join(", ")}
