@@ -16,6 +16,9 @@ ENV NODE_ENV=production
 COPY --from=BUILDER /usr/src/app/.next/standalone ./
 COPY --from=BUILDER /usr/src/app/.next/static ./.next/static
 COPY --from=BUILDER /usr/src/app/public ./public
+LABEL title="humanwater-next-startkit"
+LABEL version="1.0"
+LABEL maker="lunatics384@gmail.com"
 
 EXPOSE 3000
 CMD ["node", "server.js"]
